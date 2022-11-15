@@ -27,7 +27,7 @@ class TestPyQuery(unittest.TestCase):
     def test_hello(self):
         hello = "hello world!"
         q = pyflwor.compile("hello")
-        self.assertEquals(q(locals()), set([hello]))
+        self.assertEqual(q(locals()), set([hello]))
 
     def test_iterdown(self):
         class A(object):
@@ -39,8 +39,8 @@ class TestPyQuery(unittest.TestCase):
         o.x = [A("asdf"), A("123")]
         o.x[0].y = A(answer)
         d = {"hasattr": hasattr, "o": o}
-        self.assertEquals(exe('o/x[hasattr(self,"y")]/y/q', d), set([answer]))
-        self.assertEquals(exe("o/x", d), set(o.x))
+        self.assertEqual(exe('o/x[hasattr(self,"y")]/y/q', d), set([answer]))
+        self.assertEqual(exe("o/x", d), set(o.x))
 
     def test_cmpops(self):
         class A(object):
@@ -48,58 +48,58 @@ class TestPyQuery(unittest.TestCase):
                 self.q = q
 
         a = A(5)
-        self.assertEquals(exe("a[self.q == 5]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q != 5]", locals()), set([]))
-        self.assertEquals(exe("a[self.q >= 5]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q <= 5]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q > 5]", locals()), set([]))
-        self.assertEquals(exe("a[self.q < 5]", locals()), set([]))
-        self.assertEquals(exe("a[self.q == 7]", locals()), set([]))
-        self.assertEquals(exe("a[self.q != 7]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q >= 7]", locals()), set([]))
-        self.assertEquals(exe("a[self.q <= 7]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q > 7]", locals()), set([]))
-        self.assertEquals(exe("a[self.q < 7]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q == 3]", locals()), set([]))
-        self.assertEquals(exe("a[self.q != 3]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q >= 3]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q <= 3]", locals()), set([]))
-        self.assertEquals(exe("a[self.q > 3]", locals()), set([a]))
-        self.assertEquals(exe("a[self.q < 3]", locals()), set([]))
+        self.assertEqual(exe("a[self.q == 5]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q != 5]", locals()), set([]))
+        self.assertEqual(exe("a[self.q >= 5]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q <= 5]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q > 5]", locals()), set([]))
+        self.assertEqual(exe("a[self.q < 5]", locals()), set([]))
+        self.assertEqual(exe("a[self.q == 7]", locals()), set([]))
+        self.assertEqual(exe("a[self.q != 7]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q >= 7]", locals()), set([]))
+        self.assertEqual(exe("a[self.q <= 7]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q > 7]", locals()), set([]))
+        self.assertEqual(exe("a[self.q < 7]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q == 3]", locals()), set([]))
+        self.assertEqual(exe("a[self.q != 3]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q >= 3]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q <= 3]", locals()), set([]))
+        self.assertEqual(exe("a[self.q > 3]", locals()), set([a]))
+        self.assertEqual(exe("a[self.q < 3]", locals()), set([]))
 
     def test_smpl_boolean_exprs(self):
         a = "hello"
         true = True
         false = False
-        self.assertEquals(exe("a[true]", locals()), set([a]))
-        self.assertEquals(exe("a[false]", locals()), set([]))
-        self.assertEquals(exe("a[not true]", locals()), set([]))
-        self.assertEquals(exe("a[not false]", locals()), set([a]))
-        self.assertEquals(exe("a[true and true]", locals()), set([a]))
-        self.assertEquals(exe("a[false and true]", locals()), set([]))
-        self.assertEquals(exe("a[not true and true]", locals()), set([]))
-        self.assertEquals(exe("a[not false and true]", locals()), set([a]))
-        self.assertEquals(exe("a[true or false]", locals()), set([a]))
-        self.assertEquals(exe("a[true or true]", locals()), set([a]))
-        self.assertEquals(exe("a[false or true]", locals()), set([a]))
-        self.assertEquals(exe("a[false or false]", locals()), set([]))
-        self.assertEquals(exe("a[not true or true]", locals()), set([a]))
-        self.assertEquals(exe("a[not false or false]", locals()), set([a]))
-        self.assertEquals(exe("a[true and true and true and true]", locals()), set([a]))
-        self.assertEquals(exe("a[true and true and true and false]", locals()), set([]))
+        self.assertEqual(exe("a[true]", locals()), set([a]))
+        self.assertEqual(exe("a[false]", locals()), set([]))
+        self.assertEqual(exe("a[not true]", locals()), set([]))
+        self.assertEqual(exe("a[not false]", locals()), set([a]))
+        self.assertEqual(exe("a[true and true]", locals()), set([a]))
+        self.assertEqual(exe("a[false and true]", locals()), set([]))
+        self.assertEqual(exe("a[not true and true]", locals()), set([]))
+        self.assertEqual(exe("a[not false and true]", locals()), set([a]))
+        self.assertEqual(exe("a[true or false]", locals()), set([a]))
+        self.assertEqual(exe("a[true or true]", locals()), set([a]))
+        self.assertEqual(exe("a[false or true]", locals()), set([a]))
+        self.assertEqual(exe("a[false or false]", locals()), set([]))
+        self.assertEqual(exe("a[not true or true]", locals()), set([a]))
+        self.assertEqual(exe("a[not false or false]", locals()), set([a]))
+        self.assertEqual(exe("a[true and true and true and true]", locals()), set([a]))
+        self.assertEqual(exe("a[true and true and true and false]", locals()), set([]))
 
     def test_nested_boolean_exprs(self):
         a = "hello"
         true = True
         false = False
-        self.assertEquals(exe("a[true and (false or true)]", locals()), set([a]))
-        self.assertEquals(exe("a[true and (false and true)]", locals()), set([]))
-        self.assertEquals(exe("a[true and (true and true)]", locals()), set([a]))
-        self.assertEquals(
+        self.assertEqual(exe("a[true and (false or true)]", locals()), set([a]))
+        self.assertEqual(exe("a[true and (false and true)]", locals()), set([]))
+        self.assertEqual(exe("a[true and (true and true)]", locals()), set([a]))
+        self.assertEqual(
             exe("a[true and (true and (not true or false))]", locals()), set([])
         )
-        self.assertEquals(exe("a[1 and (1 and (not 1 or 0))]", locals()), set([]))
-        self.assertEquals(
+        self.assertEqual(exe("a[1 and (1 and (not 1 or 0))]", locals()), set([]))
+        self.assertEqual(
             exe("a[1 and (1 and (not 1 or (1 and 0 or (1 and 1))))]", locals()),
             set([a]),
         )
@@ -113,13 +113,13 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(exe("a[1 == 1]", d), set([a]))
-        self.assertEquals(exe("a[-1 == -1]", d), set([a]))
-        self.assertEquals(exe("a[2.2 == 2.2]", d), set([a]))
-        self.assertEquals(exe('a[2.2 == float("2.2")]', d), set([a]))
-        self.assertEquals(exe("a[2 == int(2.2)]", d), set([a]))
-        self.assertEquals(exe('a["hello" == a]', d), set([a]))
-        self.assertEquals(exe('a["HELLO" == a.upper()]', d), set([a]))
+        self.assertEqual(exe("a[1 == 1]", d), set([a]))
+        self.assertEqual(exe("a[-1 == -1]", d), set([a]))
+        self.assertEqual(exe("a[2.2 == 2.2]", d), set([a]))
+        self.assertEqual(exe('a[2.2 == float("2.2")]', d), set([a]))
+        self.assertEqual(exe("a[2 == int(2.2)]", d), set([a]))
+        self.assertEqual(exe('a["hello" == a]', d), set([a]))
+        self.assertEqual(exe('a["HELLO" == a.upper()]', d), set([a]))
 
     def test_func_where_values(self):
         a = "hello"
@@ -146,11 +146,11 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(exe("a[f()]", d), set([a]))
-        self.assertEquals(exe('a[f() == "hello"]', d), set([a]))
-        self.assertEquals(exe("a[g(1,2,3) == 6]", d), set([a]))
-        self.assertEquals(exe("a[h(i,3) == 9]", d), set([a]))
-        self.assertEquals(exe("a[i(j(j)(j)(j)(h)(i,3)) == 81]", d), set([a]))
+        self.assertEqual(exe("a[f()]", d), set([a]))
+        self.assertEqual(exe('a[f() == "hello"]', d), set([a]))
+        self.assertEqual(exe("a[g(1,2,3) == 6]", d), set([a]))
+        self.assertEqual(exe("a[h(i,3) == 9]", d), set([a]))
+        self.assertEqual(exe("a[i(j(j)(j)(j)(h)(i,3)) == 81]", d), set([a]))
 
     def test_list_where_values(self):
         a = "hello"
@@ -160,13 +160,13 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(exe("a[l[0] == 1]", d), set([a]))
-        self.assertEquals(exe("a[l[1] == 2]", d), set([a]))
-        self.assertEquals(exe("a[l[7][0] == 1]", d), set([a]))
-        self.assertEquals(exe("a[l[7][1] == 2]", d), set([a]))
-        self.assertEquals(exe("a[l[7][7][0] == 1]", d), set([a]))
-        self.assertEquals(exe("a[l[7][7][1] == 2]", d), set([a]))
-        self.assertEquals(exe("a[l[7][7][7] == 8]", d), set([a]))
+        self.assertEqual(exe("a[l[0] == 1]", d), set([a]))
+        self.assertEqual(exe("a[l[1] == 2]", d), set([a]))
+        self.assertEqual(exe("a[l[7][0] == 1]", d), set([a]))
+        self.assertEqual(exe("a[l[7][1] == 2]", d), set([a]))
+        self.assertEqual(exe("a[l[7][7][0] == 1]", d), set([a]))
+        self.assertEqual(exe("a[l[7][7][1] == 2]", d), set([a]))
+        self.assertEqual(exe("a[l[7][7][7] == 8]", d), set([a]))
 
     def test_dict_where_values(self):
         a = "hello"
@@ -180,12 +180,12 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(exe('a[l["one"] == 1]', d), set([a]))
-        self.assertEquals(exe('a[l["two"] == 2]', d), set([a]))
-        self.assertEquals(exe('a[l["next"]["one"] == 1]', d), set([a]))
-        self.assertEquals(exe('a[l["next"]["two"] == 2]', d), set([a]))
-        self.assertEquals(exe('a[l["next"]["next"]["one"] == 1]', d), set([a]))
-        self.assertEquals(exe('a[l["next"]["next"]["two"] == 2]', d), set([a]))
+        self.assertEqual(exe('a[l["one"] == 1]', d), set([a]))
+        self.assertEqual(exe('a[l["two"] == 2]', d), set([a]))
+        self.assertEqual(exe('a[l["next"]["one"] == 1]', d), set([a]))
+        self.assertEqual(exe('a[l["next"]["two"] == 2]', d), set([a]))
+        self.assertEqual(exe('a[l["next"]["next"]["one"] == 1]', d), set([a]))
+        self.assertEqual(exe('a[l["next"]["next"]["two"] == 2]', d), set([a]))
 
     def test_callable_where_values(self):
         a = "hello"
@@ -213,7 +213,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe('a[m["next"][7](j)(m["next"][7])(m["next"])[7](i)(m["two"]) == 4]', d),
             set([a]),
         )
@@ -227,8 +227,8 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(exe("for x in f() return x", d), (1, 2, 3))
-        self.assertEquals(
+        self.assertEqual(exe("for x in f() return x", d), (1, 2, 3))
+        self.assertEqual(
             exe("for x in f() let y = f() return x, y", d),
             ((1, (1, 2, 3)), (2, (1, 2, 3)), (3, (1, 2, 3))),
         )
@@ -248,8 +248,8 @@ class TestPyQuery(unittest.TestCase):
         self.assertRaises(
             SyntaxError, exe, 'for x in f() order by 0 ascd return "asdf":x', d
         )
-        self.assertEquals(exe("for x in f() order by 0 ascd return x", d), (1, 2, 3))
-        self.assertEquals(exe("for x in f() order by 0 desc return x", d), (3, 2, 1))
+        self.assertEqual(exe("for x in f() order by 0 ascd return x", d), (1, 2, 3))
+        self.assertEqual(exe("for x in f() order by 0 desc return x", d), (3, 2, 1))
 
     def test_function_def(self):
         a = "hello"
@@ -259,7 +259,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for i in l
@@ -270,7 +270,7 @@ class TestPyQuery(unittest.TestCase):
             ),
             (125, 125, 125, 125, 125, 125, 125, 125),
         )
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for i in l
@@ -307,14 +307,14 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for x in <a> return if (q) then 1 else 0
           """,
                 d,
             ),
-            set([int(q)]),
+            (int(q),),
         )
 
     def test_ifExpr_short_circuit(self):
@@ -327,7 +327,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for x in <a> return if (true or X) then 1 else 0
@@ -336,7 +336,7 @@ class TestPyQuery(unittest.TestCase):
             ),
             (1,),
         )
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for x in <a> return if (false and false.x) then 1 else 0
@@ -356,7 +356,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for i in l
@@ -371,7 +371,7 @@ class TestPyQuery(unittest.TestCase):
             ),
             (1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8),
         )
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for i in l
@@ -422,7 +422,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
           for x in l
@@ -430,7 +430,7 @@ class TestPyQuery(unittest.TestCase):
           """,
                 d,
             ),
-            set([None]),
+            (None,) * 8,
         )
 
     def test_construct_class(self):
@@ -464,8 +464,8 @@ class TestPyQuery(unittest.TestCase):
         except AttributeError:
             d.update(__builtins__)
         flwr = symbols.flwrSequence([symbols.attributeValue("hello", scalar=True)])
-        self.assertEquals(flwr(d), ("hello",))
-        self.assertEquals(
+        self.assertEqual(flwr(d), ("hello",))
+        self.assertEqual(
             exe(
                 """
             return l
@@ -474,7 +474,7 @@ class TestPyQuery(unittest.TestCase):
             ),
             (l,),
         )
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             let f = function(l) {
@@ -496,7 +496,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for n in l
@@ -515,7 +515,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for n in [1,2,3,4,5,6,7,3,4,5,6,7,3,4]
@@ -534,7 +534,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for n in [
@@ -566,7 +566,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for n in l
@@ -587,7 +587,7 @@ class TestPyQuery(unittest.TestCase):
             d.update(__builtins__.__dict__)
         except AttributeError:
             d.update(__builtins__)
-        self.assertEquals(
+        self.assertEqual(
             exe(
                 """
             for n in l

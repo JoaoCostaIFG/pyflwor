@@ -8,9 +8,7 @@ Licensed under a BSD style license see the LICENSE file.
 File: pyflwor.py
 Purpose: The public API for PyFlwor.
 """
-from __future__ import absolute_import
-from __future__ import unicode_literals
-from builtins import str, bytes
+from builtins import bytes
 
 from parser import Parser
 from lexer import Lexer
@@ -30,3 +28,9 @@ def execute(query, namespace):
     particular query many times, use compile to get a query function.
     """
     return compile(query)(namespace)
+
+
+if __name__ == "__main__":
+    c = [1, 1, 1, 1, 2, 3, 4, 5]
+    d = locals()
+    print(execute("for x in c return x", d))

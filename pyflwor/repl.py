@@ -23,7 +23,7 @@ import subprocess
 import pickle as pickle
 from tempfile import mkstemp as tmpfile
 from getline import Getlines
-from . import pyflwor
+import pyflwor
 
 getline = Getlines(".getline-history").getline
 

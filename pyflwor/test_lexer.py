@@ -69,9 +69,9 @@ class TestLexer(unittest.TestCase):
     def test_contextmng(self):
         t1 = token("NAME", "a", 0, 1)
         t2 = token("NAME", "a", 0, 1)
-        self.assertNotEquals(t1, t2)
+        self.assertNotEqual(t1, t2)
         with comparable_tokens():
-            self.assertEquals(t1, t2)
+            self.assertEqual(t1, t2)
 
     def test_NAME(self):
         clex = lexer.Lexer()
@@ -84,7 +84,7 @@ class TestLexer(unittest.TestCase):
         with comparable_tokens():
             for i, t1 in enumerate(clex):
                 # showcmp(t1, tokens[i])
-                self.assertEquals(t1, tokens[i])
+                self.assertEqual(t1, tokens[i])
 
     def test_STRING(self):
         clex = lexer.Lexer()
@@ -96,7 +96,7 @@ class TestLexer(unittest.TestCase):
         ]
         with comparable_tokens():
             for i, t1 in enumerate(clex):
-                self.assertEquals(t1, tokens[i])
+                self.assertEqual(t1, tokens[i])
 
     def test_HEX(self):
         clex = lexer.Lexer()
@@ -104,7 +104,7 @@ class TestLexer(unittest.TestCase):
         tokens = [token("NUMBER", 0xAB, 0, 1), token("NUMBER", 171, 5, 1)]
         with comparable_tokens():
             for t2 in tokens:
-                self.assertEquals(next(clex), t2)
+                self.assertEqual(next(clex), t2)
 
     def test_FLOAT(self):
         clex = lexer.Lexer()
@@ -118,7 +118,7 @@ class TestLexer(unittest.TestCase):
         ]
         with comparable_tokens():
             for t2 in tokens:
-                self.assertEquals(next(clex), t2)
+                self.assertEqual(next(clex), t2)
 
     def test_OCT(self):
         clex = lexer.Lexer()
@@ -130,7 +130,7 @@ class TestLexer(unittest.TestCase):
         ]
         with comparable_tokens():
             for t2 in tokens:
-                self.assertEquals(next(clex), t2)
+                self.assertEqual(next(clex), t2)
 
     def test_DEC(self):
         clex = lexer.Lexer()
@@ -142,7 +142,7 @@ class TestLexer(unittest.TestCase):
         ]
         with comparable_tokens():
             for t2 in tokens:
-                self.assertEquals(next(clex), t2)
+                self.assertEqual(next(clex), t2)
 
     def test_KEYWORDS(self):
         for value, typ in list(lexer.reserved.items()):
@@ -151,7 +151,7 @@ class TestLexer(unittest.TestCase):
             tokens = [token(typ, value, 0, 1)]
             with comparable_tokens():
                 for t2 in tokens:
-                    self.assertEquals(next(clex), t2)
+                    self.assertEqual(next(clex), t2)
 
     def test_chrs(self):
         for typ, value in [
@@ -169,7 +169,7 @@ class TestLexer(unittest.TestCase):
             with comparable_tokens():
                 for t2 in tokens:
                     # print(clex.type, clex.value, clex.lexpos, clex.lineno)
-                    self.assertEquals(next(clex), t2)
+                    self.assertEqual(next(clex), t2)
 
 
 if __name__ == "__main__":
