@@ -9,8 +9,6 @@ File: t_parser.py
 Purpose: System Tests
 NB: More tests need to be written, this is just the start.
 """
-from __future__ import division
-from __future__ import absolute_import
 from past.utils import old_div
 from builtins import object
 
@@ -596,7 +594,7 @@ class TestPyQuery(unittest.TestCase):
             }
             where 1 in l and 12 not in l
             collect n as n with counter
-            collect n as (int(n)/int(2)) with counter
+            collect n as (int(n)//int(2)) with counter
           """,
                 d,
             ),

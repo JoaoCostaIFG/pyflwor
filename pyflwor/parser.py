@@ -8,8 +8,6 @@ Licensed under a BSD style license see the LICENSE file.
 File: parser.py
 Purpose: The LALR parser for the query compiler.
 """
-from __future__ import print_function
-from __future__ import absolute_import
 from builtins import object
 
 from ply import yacc
@@ -39,7 +37,7 @@ class Parser(object):
     tokens = tokens
     precedence = (
         ("right", "RSQUARE"),
-        ("right", "DASH", "PLUS", "SLASH", "STAR"),
+        ("right", "DASH", "PLUS", "SLASHSLASH", "SLASH", "STAR"),
     )
 
     def p_Start1(self, t):
@@ -434,10 +432,14 @@ class Parser(object):
         t[0] = symbols.arithValue(t[1], symbols.arith_operator(t[2]), t[3])
 
     def p_MulDiv2(self, t):
-        "MulDiv : MulDiv SLASH ArithUnary"
+        "MulDiv : MulDiv SLASHSLASH ArithUnary"
         t[0] = symbols.arithValue(t[1], symbols.arith_operator(t[2]), t[3])
 
     def p_MulDiv3(self, t):
+        "MulDiv : MulDiv SLASH ArithUnary"
+        t[0] = symbols.arithValue(t[1], symbols.arith_operator(t[2]), t[3])
+
+    def p_MulDiv4(self, t):
         "MulDiv : ArithUnary"
         t[0] = t[1]
 

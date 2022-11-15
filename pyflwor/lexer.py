@@ -8,7 +8,6 @@ Licensed under a BSD style license see the LICENSE file.
 File: lexer.py
 Purpose: The lexer front end for the Query Compiler.
 """
-from __future__ import print_function
 from builtins import object
 
 from ply import lex
@@ -48,6 +47,7 @@ tokens = (
     "STAR",
     "DASH",
     "PLUS",
+    "SLASHSLASH",
     "SLASH",
     "EQEQ",
     "EQ",
@@ -133,6 +133,7 @@ class Lexer(object):
     t_COMMA = r","
     t_COLON = r"\:"
     t_SLASH = r"/"
+    t_SLASHSLASH = r"//"
     t_UNION = r"\|"
     # t_DOLLAR = r'\$'
     t_LPAREN = r"\("
@@ -211,9 +212,9 @@ class Lexer(object):
             token.value = int(token.value, 10)
         return token
 
-    @Token(r"(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)")
+    @Token(r"(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)")
     def t_COMMENT(self, token):
-        # print token.lexer.lineno, len(token.value.split('\n')), token.value.split('\n')
+        # print(token.lexer.lineno, len(token.value.split('\n')), token.value.split('\n'))
         lines = len(token.value.split("\n")) - 1
         if lines < 0:
             lines = 0

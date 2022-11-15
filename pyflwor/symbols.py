@@ -8,12 +8,9 @@ Licensed under a BSD style license see the LICENSE file.
 File: symbols.py
 Purpose: Objects and functions representing components of a query.
 """
-from __future__ import division
-from __future__ import absolute_import
 from builtins import zip
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import object
 
 from collections import deque
@@ -178,7 +175,9 @@ def arith_operator(op):
     if op == "*":
         return lambda x, y: x * y
     if op == "/":
-        return lambda x, y: old_div(x, y)
+        return lambda x, y: x / y
+    if op == "//":
+        return lambda x, y: x // y
     raise Exception("operator %s not found" % op)
 
 
