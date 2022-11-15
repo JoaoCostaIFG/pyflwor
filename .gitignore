@@ -6,3 +6,4 @@ parsetab.py
 .swork.*
 env
 
+.venv/
