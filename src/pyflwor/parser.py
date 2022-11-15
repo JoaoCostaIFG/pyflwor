@@ -11,8 +11,8 @@ Purpose: The LALR parser for the query compiler.
 from builtins import object
 
 from ply import yacc
-from lexer import tokens, Lexer
-import symbols
+from pyflwor.lexer import tokens, Lexer
+import pyflwor.symbols as symbols
 
 # The parser does not build an abstract syntax tree nor does it build
 # intermediate code, instead it composes functions and objects together. These

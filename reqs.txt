@@ -1,3 +1,0 @@
--egit+https://github.com/timtadh/getline.git#egg=getline
-nose
-ply

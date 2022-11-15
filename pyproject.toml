@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyFlwor"
+version = "1.0.0"
+authors = [
+  { name="Tim Henderson", email="tim.tadh@hackthology.com" },
+]
+description = "The Python Object Query System"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["ply"]
+
+[project.urls]
+"Homepage" = "https://github.com/JoaoCostaIFG/pyflwor"
+"Bug Tracker" = "https://github.com/JoaoCostaIFG/pyflwor"

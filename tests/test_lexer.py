@@ -8,8 +8,6 @@ Licensed under a BSD style license see the LICENSE file.
 File: t_lexer.py
 Purpose: Tests for the Lexer
 """
-from __future__ import print_function
-from __future__ import absolute_import
 from builtins import next
 
 # import base64
@@ -22,7 +20,8 @@ import unittest
 
 from contextlib import contextmanager
 from ply import lex
-import lexer
+
+from pyflwor import lexer
 
 
 def showcmp(a, b):

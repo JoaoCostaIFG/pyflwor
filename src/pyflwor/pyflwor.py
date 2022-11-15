@@ -10,8 +10,8 @@ Purpose: The public API for PyFlwor.
 """
 from builtins import bytes
 
-from parser import Parser
-from lexer import Lexer
+from pyflwor.parser import Parser
+from pyflwor.lexer import Lexer
 
 
 def compile(query):

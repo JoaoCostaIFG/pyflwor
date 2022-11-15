@@ -12,11 +12,11 @@ NB: More tests need to be written, this is just the start.
 from past.utils import old_div
 from builtins import object
 
-import unittest, os, sys, base64, itertools, random, time
+import unittest
 
 
 import pyflwor
-import symbols
+import pyflwor.symbols as symbols
 
 exe = pyflwor.execute
 
