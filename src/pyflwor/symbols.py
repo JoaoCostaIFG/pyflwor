@@ -445,7 +445,7 @@ def queryValue(q):
                         else:
                             add(queue, u, v, i)  # otherwise add to the queue
 
-        return set(select(objs, attrs))
+        return list(select(objs, attrs))
 
     object.__setattr__(query, "__objquery__", True)
     return query
